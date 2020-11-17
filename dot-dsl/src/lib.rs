@@ -1,18 +1,28 @@
 pub mod graph {
     pub mod graph_items {
         pub mod edge {
+            use std::collections::HashMap;
 
             #[derive(PartialEq, Debug)]
             pub struct Edge {
                 pub start: String,
                 pub end: String,
+                pub attrs: HashMap<String, String>,
             }
             impl Edge {
                 pub fn new(start: &str, end: &str) -> Self {
                     Edge {
                         start: String::from(start),
                         end: String::from(end),
+                        attrs: HashMap::new(),
                     }
+                }
+                pub fn with_attrs(mut self, attrs: &[(&str, &str)]) -> Self {
+                    for attr in attrs {
+                        self.attrs
+                            .insert((*attr).0.to_string(), (*attr).1.to_string());
+                    }
+                    self
                 }
             }
         }
@@ -79,7 +89,9 @@ pub mod graph {
         pub fn with_edges(mut self, edges: &Vec<Edge>) -> Self {
             for edge in edges {
                 let mut new_edge = Edge::new(&edge.start, &edge.end);
-
+                for attr in &edge.attrs {
+                    new_edge.attrs.insert(attr.0.clone(), attr.1.clone());
+                }
                 self.edges.push(new_edge)
             }
             self
