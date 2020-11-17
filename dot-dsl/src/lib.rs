@@ -51,6 +51,13 @@ pub mod graph {
                     }
                     self
                 }
+
+                pub fn get_attr(self, attr: &str) -> Option<String> {
+                    match self.attrs.get(&attr.to_string()) {
+                        None => None,
+                        Some(s) => Some(s.to_string()),
+                    }
+                }
             }
         }
     }
@@ -59,7 +66,7 @@ pub mod graph {
     use graph_items::node::Node;
     use std::collections::HashMap;
 
-    #[derive(PartialEq, Debug)]
+    #[derive(PartialEq, Debug, Default)]
     pub struct Graph {
         pub nodes: Vec<Node>,
         pub edges: Vec<Edge>,
@@ -75,7 +82,7 @@ pub mod graph {
             }
         }
 
-        pub fn with_nodes(mut self, nodes: &Vec<Node>) -> Self {
+        pub fn with_nodes(mut self, nodes: &[Node]) -> Self {
             for node in nodes {
                 let mut new_node = Node::new(&node.label);
                 for attr in &node.attrs {
@@ -86,7 +93,7 @@ pub mod graph {
             self
         }
 
-        pub fn with_edges(mut self, edges: &Vec<Edge>) -> Self {
+        pub fn with_edges(mut self, edges: &[Edge]) -> Self {
             for edge in edges {
                 let mut new_edge = Edge::new(&edge.start, &edge.end);
                 for attr in &edge.attrs {
@@ -105,8 +112,18 @@ pub mod graph {
             self
         }
 
-        pub fn get_node(self, label: &str) -> Self {
-            unimplemented!("get_node");
+        pub fn get_node(self, label: &str) -> Option<Node> {
+            let matching_node = self.nodes.iter().find(|node| node.label == label);
+            match matching_node {
+                None => None,
+                Some(node) => {
+                    let mut new_node = Node::new(&node.label);
+                    for attr in &node.attrs {
+                        new_node.attrs.insert(attr.0.clone(), attr.1.clone());
+                    }
+                    Some(new_node)
+                }
+            }
         }
     }
 }
