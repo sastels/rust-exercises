@@ -18,24 +18,26 @@ pub mod graph {
         }
 
         pub mod node {
+            use std::collections::HashMap;
+
             #[derive(PartialEq, Debug)]
             pub struct Node {
                 pub label: String,
-                pub attrs: Vec<(String, String)>,
+                pub attrs: HashMap<String, String>,
             }
 
             impl Node {
                 pub fn new(label: &str) -> Self {
                     Node {
                         label: String::from(label),
-                        attrs: vec![],
+                        attrs: HashMap::new(),
                     }
                 }
 
                 pub fn with_attrs(mut self, attrs: &[(&str, &str)]) -> Self {
                     for attr in attrs {
                         self.attrs
-                            .push(((*attr).0.to_string(), (*attr).1.to_string()))
+                            .insert((*attr).0.to_string(), (*attr).1.to_string());
                     }
                     self
                 }
@@ -45,12 +47,13 @@ pub mod graph {
 
     use graph_items::edge::Edge;
     use graph_items::node::Node;
+    use std::collections::HashMap;
 
     #[derive(PartialEq, Debug)]
     pub struct Graph {
         pub nodes: Vec<Node>,
         pub edges: Vec<Edge>,
-        pub attrs: Vec<(String, String)>,
+        pub attrs: HashMap<String, String>,
     }
 
     impl Graph {
@@ -58,7 +61,7 @@ pub mod graph {
             Graph {
                 nodes: vec![],
                 edges: vec![],
-                attrs: vec![],
+                attrs: HashMap::new(),
             }
         }
 
@@ -66,7 +69,7 @@ pub mod graph {
             for node in nodes {
                 let mut new_node = Node::new(&node.label);
                 for attr in &node.attrs {
-                    new_node.attrs.push((attr.0.clone(), attr.1.clone()));
+                    new_node.attrs.insert(attr.0.clone(), attr.1.clone());
                 }
                 self.nodes.push(new_node)
             }
@@ -85,7 +88,7 @@ pub mod graph {
         pub fn with_attrs(mut self, attrs: &[(&str, &str)]) -> Self {
             for attr in attrs {
                 self.attrs
-                    .push(((*attr).0.to_string(), (*attr).1.to_string()))
+                    .insert((*attr).0.to_string(), (*attr).1.to_string());
             }
             self
         }
