@@ -1,4 +1,4 @@
-name: simple-linked-list
+name: latest exercise
 on: [push]
 
 env:
@@ -10,8 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build
-        working-directory: ./simple-linked-list
+        working-directory: ./pascals-triangle
         run: cargo build --verbose
       - name: Run tests
-        working-directory: ./simple-linked-list
+        working-directory: ./pascals-triangle
         run: cargo test --verbose
