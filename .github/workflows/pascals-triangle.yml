@@ -1,0 +1,17 @@
+name: Pascal's triangle
+on: [push]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        working-directory: ./pascals-triangle
+        run: cargo build --verbose
+      - name: Run tests
+        working-directory: ./pascals-triangle
+        run: cargo test --verbose
