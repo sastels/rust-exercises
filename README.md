@@ -1,6 +1,6 @@
 # rust-exercises
 
-![](https://github.com/sastels/rust-exercises/workflows/latest/badge.svg)
+![](https://github.com/sastels/rust-exercises/workflows/latest exercise/badge.svg)
 
 learning rust using
 * [exercism.io](https://exercism.io/my/tracks/rust)
