@@ -2,6 +2,7 @@ name: latest
 on: [push]
 
 env:
+  SUBDIR: paasio
   CARGO_TERM_COLOR: always
 
 jobs:
@@ -10,8 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build
-        working-directory: ./pascals-triangle
+        working-directory: ./${{ env.SUBDIR }}
         run: cargo build --verbose
       - name: Run tests
-        working-directory: ./pascals-triangle
+        working-directory: ./${{ env.SUBDIR }}
         run: cargo test --verbose
+      - name: Run ignored tests
+        working-directory: ./${{ env.SUBDIR }}
+        run: cargo test --verbose -- --ignored
