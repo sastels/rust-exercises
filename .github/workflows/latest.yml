@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: etl
+  SUBDIR: acronym
   CARGO_TERM_COLOR: always
 
 jobs:
