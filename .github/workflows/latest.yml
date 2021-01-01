@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: acronym
+  SUBDIR: triangle
   CARGO_TERM_COLOR: always
 
 jobs:
