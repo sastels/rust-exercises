@@ -1,19 +1,30 @@
-pub struct Triangle;
+pub struct Triangle {
+    sides: [u64; 3],
+}
 
 impl Triangle {
     pub fn build(sides: [u64; 3]) -> Option<Triangle> {
-        unimplemented!("Construct new Triangle from following sides: {:?}. Return None if the sides are invalid.", sides);
+        let sum: u64 = sides.iter().sum();
+        if sides.iter().any(|&x| x >= sum - x) {
+            return None;
+        }
+        Some(Triangle { sides })
     }
 
     pub fn is_equilateral(&self) -> bool {
-        unimplemented!("Determine if the Triangle is equilateral.");
+        let min: u64 = *self.sides.iter().min().unwrap();
+        self.sides.iter().all(|&x| x == min)
     }
 
     pub fn is_scalene(&self) -> bool {
-        unimplemented!("Determine if the Triangle is scalene.");
+        let min: u64 = *self.sides.iter().min().unwrap();
+        let max: u64 = *self.sides.iter().max().unwrap();
+        min != max && self.sides.iter().any(|&x| x != min && x != max)
     }
 
     pub fn is_isosceles(&self) -> bool {
-        unimplemented!("Determine if the Triangle is isosceles.");
+        let min: u64 = *self.sides.iter().min().unwrap();
+        let max: u64 = *self.sides.iter().max().unwrap();
+        min != max && self.sides.iter().all(|&x| x == min || x == max)
     }
 }
