@@ -1,10 +1,17 @@
-pub struct Triangle {
-    sides: [u64; 3],
+use std::ops::{Add, Sub};
+
+pub struct Triangle<T> {
+    sides: [T; 3],
 }
 
-impl Triangle {
-    pub fn build(sides: [u64; 3]) -> Option<Triangle> {
-        let sum: u64 = sides.iter().sum();
+impl<T> Triangle<T>
+where
+    T: Copy + PartialOrd,
+    T: Add<Output = T>,
+    <T as Add>::Output: Sub<Output = T>,
+{
+    pub fn build(sides: [T; 3]) -> Option<Triangle<T>> {
+        let sum: T = sides[0] + sides[1] + sides[2];
         if sides.iter().any(|&x| x >= sum - x) {
             return None;
         }
@@ -12,19 +19,16 @@ impl Triangle {
     }
 
     pub fn is_equilateral(&self) -> bool {
-        let min: u64 = *self.sides.iter().min().unwrap();
-        self.sides.iter().all(|&x| x == min)
+        self.sides[0] == self.sides[1] && self.sides[1] == self.sides[2]
     }
 
     pub fn is_scalene(&self) -> bool {
-        let min: u64 = *self.sides.iter().min().unwrap();
-        let max: u64 = *self.sides.iter().max().unwrap();
-        min != max && self.sides.iter().any(|&x| x != min && x != max)
+        !self.is_isosceles()
     }
 
     pub fn is_isosceles(&self) -> bool {
-        let min: u64 = *self.sides.iter().min().unwrap();
-        let max: u64 = *self.sides.iter().max().unwrap();
-        min != max && self.sides.iter().all(|&x| x == min || x == max)
+        self.sides[0] == self.sides[1]
+            || self.sides[0] == self.sides[2]
+            || self.sides[1] == self.sides[2]
     }
 }
