@@ -20,6 +20,7 @@ impl School {
     pub fn add(&mut self, grade: u32, student: &str) {
         let kids = self.enrolled.entry(grade).or_insert_with(Vec::new);
         kids.push(student.to_string());
+        kids.sort();
     }
 
     pub fn grades(&self) -> Vec<u32> {
@@ -35,11 +36,7 @@ impl School {
     pub fn grade(&self, grade: u32) -> Option<Vec<String>> {
         let gr = self.enrolled.get(&grade);
         match gr {
-            Some(gr) => {
-                let mut gr = gr.clone();
-                gr.sort();
-                Some(gr)
-            }
+            Some(gr) => Some(gr.clone()),
             None => None,
         }
     }
