@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: binary-search
+  SUBDIR: robot-simulator
   CARGO_TERM_COLOR: always
 
 jobs:
@@ -21,4 +21,4 @@ jobs:
         run: cargo test --verbose -- --ignored
       - name: Clippy
         working-directory: ./${{ env.SUBDIR }}
-        run: cargo clippy --all-targets
+        run: cargo clippy -- -D warnings
