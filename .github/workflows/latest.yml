@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: grade-school
+  SUBDIR: binary-search
   CARGO_TERM_COLOR: always
 
 jobs:
