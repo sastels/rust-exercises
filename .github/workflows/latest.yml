@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: binary-search
+  SUBDIR: robot-simulator
   CARGO_TERM_COLOR: always
 
 jobs:
