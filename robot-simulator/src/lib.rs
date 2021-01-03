@@ -60,7 +60,7 @@ impl Robot {
     }
 
     pub fn instructions(self, instructions: &str) -> Self {
-        let mut robot = self.clone();
+        let mut robot = self;
         instructions.chars().for_each(|c| match c {
             'A' => robot = robot.advance(),
             'L' => robot = robot.turn_left(),
