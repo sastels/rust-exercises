@@ -12,6 +12,12 @@ pub struct BowlingGame {
     balls_per_frame: usize,
 }
 
+impl Default for BowlingGame {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BowlingGame {
     pub fn new() -> Self {
         BowlingGame {
