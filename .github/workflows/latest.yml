@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: queen-attack
+  SUBDIR: bowling
   CARGO_TERM_COLOR: always
 
 jobs:
