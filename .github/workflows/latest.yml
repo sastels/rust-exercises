@@ -16,9 +16,6 @@ jobs:
       - name: Run tests
         working-directory: ./${{ env.SUBDIR }}
         run: cargo test --verbose
-      - name: Run any ignored tests
-        working-directory: ./${{ env.SUBDIR }}
-        run: cargo test --verbose -- --ignored
       - name: Clippy
         working-directory: ./${{ env.SUBDIR }}
         run: cargo clippy -- -D warnings

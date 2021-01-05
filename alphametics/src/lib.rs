@@ -2,8 +2,6 @@ use itertools::Itertools;
 use std::collections::HashMap;
 
 fn check_eqn(input: &str, vals: &HashMap<char, u8>) -> bool {
-    // return false;
-
     let mut equation = input.to_string().replace(' ', "");
     for (key, val) in vals {
         equation = equation.replace(*key, &val.to_string());
@@ -18,15 +16,8 @@ fn check_eqn(input: &str, vals: &HashMap<char, u8>) -> bool {
     if summands.iter().any(|s| s.starts_with('0')) {
         return false;
     }
-
     let sum: usize = summands.iter().map(|x| x.parse::<usize>().unwrap()).sum();
-    if answer == 101 {
-        println!("{:?}  sum: {} answer {}", &vals, sum, answer);
-    }
 
-    if sum == answer {
-        println!("{:?}  sum: {} answer {} ****", &vals, sum, answer);
-    }
     sum == answer
 }
 
@@ -37,7 +28,6 @@ pub fn solve(input: &str) -> Option<HashMap<char, u8>> {
         .unique()
         .collect();
 
-    println!("letters: {:?}", letters);
     let perms: Vec<_> = (0..10).permutations(letters.len()).collect();
 
     let solutions: Vec<HashMap<_, _>> = perms
