@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: bowling
+  SUBDIR: tournament
   CARGO_TERM_COLOR: always
 
 jobs:
