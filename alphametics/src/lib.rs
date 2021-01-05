@@ -34,7 +34,7 @@ pub fn solve(input: &str) -> Option<HashMap<char, u8>> {
         .iter()
         .map(|v| {
             let solns: HashMap<char, u8> = letters.iter().cloned().zip(v.iter().cloned()).collect();
-            return solns;
+            solns
         })
         .collect();
 
@@ -46,5 +46,5 @@ pub fn solve(input: &str) -> Option<HashMap<char, u8>> {
     if !solutions.is_empty() {
         return Some(solutions[0].clone());
     }
-    return None;
+    None
 }
