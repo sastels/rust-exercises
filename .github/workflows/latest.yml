@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: spiral-matrix
+  SUBDIR: palindrome-products
   CARGO_TERM_COLOR: always
 
 jobs:
