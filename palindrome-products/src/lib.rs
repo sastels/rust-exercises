@@ -25,21 +25,22 @@ fn is_palindrome(a: u64, b: u64) -> bool {
 }
 
 pub fn palindrome_products(min: u64, max: u64) -> Option<(Palindrome, Palindrome)> {
+    use std::cmp::Ordering;
     let mut min_palindrome = Palindrome::new(max + 1, max + 1);
     let mut max_palindrome = Palindrome::new(0, 0);
 
     for a in min..=max {
         for b in a..=max {
             if is_palindrome(a, b) {
-                if a * b < min_palindrome.value() {
-                    min_palindrome = Palindrome::new(a, b);
-                } else if a * b == min_palindrome.value() {
-                    min_palindrome.insert(a, b);
+                match (a * b).cmp(&min_palindrome.value()) {
+                    Ordering::Less => min_palindrome = Palindrome::new(a, b),
+                    Ordering::Equal => min_palindrome.insert(a, b),
+                    Ordering::Greater => (),
                 }
-                if a * b > max_palindrome.value() {
-                    max_palindrome = Palindrome::new(a, b);
-                } else if a * b == max_palindrome.value() {
-                    max_palindrome.insert(a, b);
+                match (a * b).cmp(&max_palindrome.value()) {
+                    Ordering::Less => (),
+                    Ordering::Equal => max_palindrome.insert(a, b),
+                    Ordering::Greater => max_palindrome = Palindrome::new(a, b),
                 }
             }
         }
