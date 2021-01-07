@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: saddle-points
+  SUBDIR: isogram
   CARGO_TERM_COLOR: always
 
 jobs:
