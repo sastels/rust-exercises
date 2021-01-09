@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: isogram
+  SUBDIR: say
   CARGO_TERM_COLOR: always
 
 jobs:
