@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: perfect-numbers
+  SUBDIR: hamming
   CARGO_TERM_COLOR: always
 
 jobs:
