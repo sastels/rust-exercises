@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: scrabble-score
+  SUBDIR: pangram
   CARGO_TERM_COLOR: always
 
 jobs:
