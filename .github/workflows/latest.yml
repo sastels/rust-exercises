@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: isbn-verifier
+  SUBDIR: perfect-numbers
   CARGO_TERM_COLOR: always
 
 jobs:
