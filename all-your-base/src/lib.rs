@@ -37,10 +37,38 @@ pub enum Error {
 ///    However, your function must be able to process input with leading 0 digits.
 ///
 pub fn convert(number: &[u32], from_base: u32, to_base: u32) -> Result<Vec<u32>, Error> {
-    unimplemented!(
-        "Convert {:?} from base {} to base {}",
-        number,
-        from_base,
-        to_base
-    )
+    // if number.is_empty() {
+    //     return Ok(vec![0]);
+    // }
+
+    if let Some(bad_digit) = number.iter().find(|n| **n >= from_base) {
+        return Err(Error::InvalidDigit(*bad_digit));
+    } else if from_base < 2 {
+        return Err(Error::InvalidInputBase);
+    } else if to_base < 2 {
+        return Err(Error::InvalidOutputBase);
+    }
+
+    let mut real_number: u32 = number
+        .iter()
+        .rev()
+        .zip((0..).map(|n| from_base.pow(n)))
+        .map(|(digit, place)| digit * place)
+        .sum();
+
+    println!("real number {}", real_number);
+
+    if real_number == 0 {
+        return Ok(vec![0]);
+    }
+    let mut number = vec![];
+    loop {
+        if real_number == 0 {
+            break;
+        }
+        let new_digit = real_number % to_base;
+        real_number = (real_number - new_digit) / to_base;
+        number.push(new_digit);
+    }
+    Ok(number.iter().rev().cloned().collect())
 }
