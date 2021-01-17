@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: all-your-base
+  SUBDIR: allergies
   CARGO_TERM_COLOR: always
 
 jobs:
