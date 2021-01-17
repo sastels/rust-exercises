@@ -1,6 +1,8 @@
-pub struct Allergies;
+pub struct Allergies {
+    allergens: Vec<Allergen>,
+}
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum Allergen {
     Eggs,
     Peanuts,
@@ -10,24 +12,38 @@ pub enum Allergen {
     Chocolate,
     Pollen,
     Cats,
+    FavaBeans,
 }
 
 impl Allergies {
     pub fn new(score: u32) -> Self {
-        unimplemented!(
-            "Given the '{}' score, construct a new Allergies struct.",
-            score
-        );
+        use Allergen::*;
+        let allergens = (0..)
+            .zip(
+                [
+                    Eggs,
+                    Peanuts,
+                    Shellfish,
+                    Strawberries,
+                    Tomatoes,
+                    Chocolate,
+                    Pollen,
+                    Cats,
+                ]
+                .iter(),
+            )
+            .filter(|(n, _)| (score >> n) & 1 == 1)
+            .map(|(_, allergen)| allergen)
+            .cloned()
+            .collect();
+        Allergies { allergens }
     }
 
     pub fn is_allergic_to(&self, allergen: &Allergen) -> bool {
-        unimplemented!(
-            "Determine if the patient is allergic to the '{:?}' allergen.",
-            allergen
-        );
+        self.allergens.contains(allergen)
     }
 
     pub fn allergies(&self) -> Vec<Allergen> {
-        unimplemented!("Return the list of allergens contained within the score with which the Allergies struct was made.");
+        self.allergens.clone()
     }
 }
