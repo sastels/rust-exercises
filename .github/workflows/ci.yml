@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: allergies
+  SUBDIR: affine-cipher
   CARGO_TERM_COLOR: always
 
 jobs:
