@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: variable-length-quantity
+  SUBDIR: pig-latin
   CARGO_TERM_COLOR: always
 
 jobs:
