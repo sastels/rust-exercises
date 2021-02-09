@@ -2,7 +2,7 @@ name: latest
 on: [push]
 
 env:
-  SUBDIR: affine-cipher
+  SUBDIR: variable-length-quantity
   CARGO_TERM_COLOR: always
 
 jobs:
